@@ -1,0 +1,16 @@
+{
+  "name": "Fetch",
+  "version": "1.0.0",
+  "description": "",
+  "main": "fetch-test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "unirest": "^0.6.0",
+    "unsplash-js": "^6.0.0"
+  }
+}
