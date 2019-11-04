@@ -6,7 +6,7 @@ let units = 'metric';
 
 const forecastURL = `http://api.openweathermap.org/data/2.5/weather?id=${cityId}&APPID=${APIKEY}&units=${units}`;
 
-let getDataToFile = async(url) => {
+let showForecast = async(url) => {
     let response = await fetch(url);
     let data = await response.json();
 
@@ -41,4 +41,4 @@ let getDataToFile = async(url) => {
     console.log(`Last update: ${ts.toLocaleString()}`);
 }
 
-let forecastData = getDataToFile(forecastURL);
+showForecast(forecastURL);
