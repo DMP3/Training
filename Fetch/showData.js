@@ -2,23 +2,6 @@ const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync')
 const adapter = new FileSync('fuckinVarnaWeather.json')
 const db = low(adapter)
-//Set db defaults
-// db.defaults({
-//         coord: {},
-//         weather: [],
-//         base: '',
-//         main: {},
-//         visibility: 0,
-//         wind: {},
-//         clouds: {},
-//         dt: 0,
-//         sys: {},
-//         timezone: 0,
-//         id: 0,
-//         name: '',
-//         cod:0
-//     })
-//     .write()
 
 const show = () => {
     let data = db.toJSON();

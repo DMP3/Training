@@ -14,10 +14,11 @@ const createStaticInsultPage = async() => {
     let insultText = await getEvilInsult();
     console.log(insultText);
     let html = `
-    <body style="display:flex; flex-direction:column; justify-content:center; min-height:100vh;">
-        <h1 style="margin: 0 auto; background: rgb(235, 235, 235); text-align: center;">${insultText}</h1>
-    </body>`;
-    fs.writeFile("table.html", html, (err) => {
+        <body style="display:flex; flex-direction:column; justify-content:center; min-height:100vh;">
+            <h1 style="margin: 0 auto; background: rgb(235, 235, 235); text-align: center;">${insultText}</h1>
+            <input style="width: 250px;" type="button" value="Refresh Page" onClick="location.href=location.href">
+        </body>`;
+    await fs.writeFile("table.html", html, (err) => {
         if (err) throw err;
         console.log('File saved!');
     });

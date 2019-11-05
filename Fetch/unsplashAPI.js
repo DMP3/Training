@@ -1,20 +1,34 @@
 const fetch = require('node-fetch');
-global.fetch = fetch;
-const Unsplash = require('unsplash-js').default;
 const fs = require('fs');
 const AUTH_KEY = 'd5ad5201ab38ae16d42c61cead67531c21249676c8cde052ec261e57f69d3900';
 
-//authenticate first
-const unsplash = new Unsplash({accessKey: AUTH_KEY});
+let query = 'something';
+let page = 1;
 
-unsplash.search.photos('whatever', 1, 10, {orientation: 'portrait'})
-.then(res => {
-    return res.json();
-}).then(json => {
-    let data = JSON.stringify(json);
-    fs.writeFile('resFromUnsplash.json' , data, (err) => {
-        if(err) throw err;
-        console.log(`The file was saved`);
+const url = `https://api.unsplash.com/search/photos/?client_id=${AUTH_KEY}&page=${page}&query=${query}`
+
+let writeToFile = async(fileName, data) => {
+    fs.writeFile(fileName, JSON.stringify(data), (err) => {
+        if (err) throw err;
+        console.log("file saved successfuly!");
     });
-})
+}
 
+let searchPhtos = async() => {
+    let response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'content-type': 'application/json'
+        }
+    });
+    let data = await response.json();
+    data = data.results;
+    let photos = [];
+    data.map(element => {
+        photos.push(element.urls.regular);
+    });
+    await writeToFile('resFromUnsplash.json', photos);
+};
+
+searchPhtos();
