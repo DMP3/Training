@@ -20,18 +20,18 @@ let getData = async(url) => {
     let forecastList = data.list;
     let filteredDailyForecast = [];
 
+    //loops through results and filters them
     forecastList.forEach(element => {
-        let frcstByDayAndHour = {
+        filteredDailyForecast.push({
             temperature: element.main.temp,
             humidity: element.main.humidity,
             windSpeed: element.wind.speed,
             weather: element.weather[0].main,
             weatherDescriprion: element.weather[0].description,
             date: element.dt_txt
-        };
-        filteredDailyForecast.push(frcstByDayAndHour);
+        });
     });
-
+    console.log(filteredDailyForecast);
     return { cityName, filteredDailyForecast };
 };
 
