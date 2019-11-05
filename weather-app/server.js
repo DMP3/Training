@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
+const fetch = require('node-fetch');
 const app = express()
 
 const apiKey = '7b1a4064ff079e43861773552d747ffd';
@@ -13,23 +14,35 @@ app.get('/', function(req, res) {
     res.render('index', { weather: null, error: null });
 })
 
-app.post('/', function(req, res) {
-    let city = req.body.city;
-    let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`
+let getData = async(url) => {
+    try {
+        let response = await fetch(url);
+        let data = await response.json();
+        return {
+            cityName: data.name,
+            temperature: data.main.temp,
+            windspeed: data.wind.speed,
+            weatherInfo: data.weather[0].main,
+            weatherDesc: data.weather[0].description
+        };
+    } catch (error) {
+        return error;
+    }
+};
 
-    request(url, function(err, response, body) {
-        if (err) {
-            res.render('index', { weather: null, error: 'Error, please try again' });
-        } else {
-            let weather = JSON.parse(body);
-            if (weather.main == undefined) {
-                res.render('index', { weather: null, error: 'Error, please try again' });
-            } else {
-                let weatherText = `It's ${weather.main.temp} degrees in ${weather.name}!`;
-                res.render('index', { weather: weatherText, error: null });
-            }
-        }
-    });
+app.post('/', async(req, res) => {
+
+    let city = req.body.city;
+
+    let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+
+    let weather = await getData(url);
+
+    console.log(weather);
+    let weatherText = `It's ${weather.temperature} degrees in ${weather.cityName}. 
+                        Windspeed is ${weather.windspeed} km/h. 
+                        ${weather.weatherInfo} / ${weather.weatherDesc}`;
+    await res.render('index', { weather: weatherText, error: null });
 })
 
 app.listen(3000, function() {
