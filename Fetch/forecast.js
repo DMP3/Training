@@ -38,27 +38,15 @@ let getData = async(url) => {
         weatherInfo,
         weatherDescriprion
     }
-
-    // console.log(`
-    //     ---${cityName} weather---\n
-    //     Temp: ${temperature}°C\n
-    //     Min/Max temp: ${temp_min}°C/${temp_max}°C\n
-    //     Wind Speed: ${windSpeed} km/h\n
-    //     Weather info: ${weatherInfo} / ${weatherDescriprion}\n
-    //     `);
-
-    // var ts = new Date();
-    // console.log(`Last update: ${ts.toLocaleString()}`);
 };
 
 const show = async() => {
     let data = await getData(forecastURL);
     console.log(`
-        ---Current ${data.cityName} weather---\n
-        Temp: ${data.temperature}°C\n
-        Min/Max temp: ${data.temp_min}°C/${data.temp_max}°C\n
-        Wind Speed: ${data.windSpeed} km/h\n
-        Weather info: ${data.weatherInfo} / ${data.weatherDescriprion}\n`);
+            ---Current ${data.cityName} weather---\n
+            Temp: ${data.temperature}°C\n
+            Min/Max temp: ${data.temp_min}°C/${data.temp_max}°C\n
+            Wind Speed: ${data.windSpeed} km/h\n
+            Weather info: ${data.weatherInfo} / ${data.weatherDescriprion}\n`);
 }
-
 show();

@@ -33,16 +33,23 @@ let getData = async(url) => {
 app.post('/', async(req, res) => {
 
     let city = req.body.city;
-
     let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
 
-    let weather = await getData(url);
+    try {
+        let fetchedData = await getData(url);
+        if (fetchedData.temperature === undefined) {
+            await res.render('index', { weather: null, error: "Try again" });
+        } else {
+            let weatherText = `It's ${fetchedData.temperature} degrees in ${fetchedData.cityName}. 
+                        Windspeed is ${fetchedData.windspeed} km/h. 
+                        ${fetchedData.weatherInfo} / ${fetchedData.weatherDesc}`;
+            await res.render('index', { weather: weatherText, error: null });
+        }
 
-    console.log(weather);
-    let weatherText = `It's ${weather.temperature} degrees in ${weather.cityName}. 
-                        Windspeed is ${weather.windspeed} km/h. 
-                        ${weather.weatherInfo} / ${weather.weatherDesc}`;
-    await res.render('index', { weather: weatherText, error: null });
+    } catch (error) {
+        await res.render('index', { weather: null, error: "Try again" });
+    }
+
 })
 
 app.listen(3000, function() {

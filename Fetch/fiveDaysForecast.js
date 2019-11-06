@@ -11,7 +11,7 @@ let getData = async(url) => {
     let response = await fetch(url);
     let data = await response.json();
 
-    //city info
+    //cityName = data.city.name
     let {
         name: cityName
     } = data.city;
@@ -31,7 +31,6 @@ let getData = async(url) => {
             date: element.dt_txt
         });
     });
-    console.log(filteredDailyForecast);
     return { cityName, filteredDailyForecast };
 };
 
