@@ -47,6 +47,7 @@ wsServer.on('request', (request) => {
     let index = clients.push(connection) - 1;
     let userName = false;
     let userColor = false;
+    
     console.log(`${new Date()} Connection accepted.`);
 
     // send back chat history
