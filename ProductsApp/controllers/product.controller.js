@@ -25,7 +25,7 @@ exports.product_details = async(req, res) => {
 exports.product_update = async(req, res) => {
     await Product.findByIdAndUpdate(req.params.id, { $set: req.body }, async(err, product) => {
         if (err) return next(err);
-        await res.send('Product udpated.');
+        await res.send(product);
     });
 };
 

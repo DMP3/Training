@@ -22,24 +22,35 @@ const getProductById = async(url) => {
 };
 // getProductById(`${productsUrl}/${ID}`);
 
+const upd = async() => {
+    const res = await fetch(`http://localhost:3000/products/5dc3ebf3539b096cd1f9811d/update`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: querystring.stringify({
+            name: 'das',
+            price: 22.2
+        })
+    });
+    const data = await res.json();
 
-/**Create a product */
-var form = {
-    name: 'takoata',
-    price: 123214,
+    console.log(data);
 };
+//upd();
 
-var formData = querystring.stringify(form);
-var contentLength = formData.length;
-
-// request({
-//     headers: {
-//         'Content-Length': contentLength,
-//         'Content-Type': 'application/x-www-form-urlencoded'
-//     },
-//     uri: `${productsUrl}/create`,
-//     body: formData,
-//     method: 'POST'
-// }, function(err, res, body) {
-//     console.log(res);
-// });
+const create = async() => {
+    const res = await fetch('http://localhost:3000/products/create', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: querystring.stringify({
+            name: "prNewShitDone",
+            price: 123.321
+        })
+    });
+    const data = await res.text();
+    console.log(data);
+}
+create();
