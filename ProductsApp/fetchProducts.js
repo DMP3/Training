@@ -20,15 +20,15 @@ const getProductById = async(url) => {
 
     console.log(data);
 };
-// getProductById(`${productsUrl}/${ID}`);
+//getProductById(`${productsUrl}/${ID}`);
 
 const upd = async() => {
     const res = await fetch(`http://localhost:3000/products/5dc3ebf3539b096cd1f9811d/update`, {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/json'
         },
-        body: querystring.stringify({
+        body: JSON.stringify({
             name: 'das',
             price: 22.2
         })
@@ -43,14 +43,14 @@ const create = async() => {
     const res = await fetch('http://localhost:3000/products/create', {
         method: "POST",
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/json'
         },
-        body: querystring.stringify({
-            name: "prNewShitDone",
-            price: 123.321
+        body: JSON.stringify({
+            name: "asfnkqgngqnkl",
+            price: 333.3212
         })
     });
     const data = await res.text();
     console.log(data);
-}
+};
 create();
