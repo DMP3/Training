@@ -21,6 +21,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/products', product);
 
-app.listen(port, () => {
+app.listen(port, async() => {
     console.log('Server is up and running on port numner ' + port);
 });
