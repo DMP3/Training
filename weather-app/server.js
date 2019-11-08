@@ -12,8 +12,8 @@ app.use(bodyParser.urlencoded({
 }));
 app.set('view engine', 'ejs')
 
-app.get('/', function(req, res) {
-  res.render('index', {
+app.get('/', async (req, res) => {
+  await res.render('index', {
     weather: null,
     error: null
   });
@@ -72,6 +72,6 @@ app.post('/', async (req, res) => {
 
 })
 
-app.listen(3000, function() {
+app.listen(3000, () => {
   console.log('Example app listening on port 3000!')
 })
