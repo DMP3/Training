@@ -22,6 +22,11 @@ app.get('/', function(req, res) {
 let getData = async (url) => {
   try {
     let response = await fetch(url);
+    let {
+      status
+    } = response;
+
+    console.info(status);
     let data = await response.json();
     return {
       cityName: data.name,
@@ -31,6 +36,7 @@ let getData = async (url) => {
       weatherDesc: data.weather[0].description
     };
   } catch (error) {
+    console.error(error);
     return error;
   }
 };
