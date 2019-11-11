@@ -9,13 +9,12 @@ const {
 // init express app
 const app = express()
 
-const mongoDB = MONGODB_URI
 const config = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false
 }
-mongoose.connect(mongoDB, config)
+mongoose.connect(MONGODB_URI, config)
 mongoose.Promise = global.Promise
 const db = mongoose.connection
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
