@@ -1,3 +1,4 @@
+.gitignore
 ProductsApp/.env
 weather-app/.env
 NoMoEx/.env
