@@ -1,9 +1,9 @@
-const fetch = require('node-fetch');
-const url = `https://freegeoip.app/json/`;
-let getInfo = async() => {
-    let response = await fetch(url);
-    let data = await response.json()
-    console.log(data);
+const fetch = require('node-fetch')
+const url = 'https://freegeoip.app/json/'
+const getInfo = async () => {
+  const response = await fetch(url)
+  const data = await response.json()
+  console.log(data)
 }
 
-getInfo();
+getInfo()
