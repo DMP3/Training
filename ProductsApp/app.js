@@ -27,5 +27,5 @@ app.use(bodyParser.urlencoded({
 app.use('/products', product)
 
 app.listen(PORT, async () => {
-  console.log('Server is up and running on port numner ' + PORT)
+  console.log(`Server is up and running on port number ${PORT}`)
 })
