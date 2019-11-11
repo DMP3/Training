@@ -1,27 +1,31 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const MongoClient = require('mongodb').MongoClient;
-const app = express();
+const express = require('express')
+const bodyParser = require('body-parser')
+const MongoClient = require('mongodb').MongoClient
+const app = express()
+const {
+  PORT,
+  MONGO_URI
+} = require('./config.js')
 
 app.set('view engine', 'ejs')
 
-const uri = "mongodb+srv://dmp3:084488105dA!A@swtest-y4wgc.mongodb.net/test?retryWrites=true&w=majority";
-const client = new MongoClient(uri, {
+const client = new MongoClient(MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
-});
-let db;
+})
+let db
 
 client.connect(err => {
-  db = client.db("test");
-  app.listen(3000, () => {
+  if (err) return err
+  db = client.db('test')
+  app.listen(PORT, () => {
     console.log('listening on 3000')
   })
-});
+})
 
 app.use(bodyParser.urlencoded({
   extended: true
-}));
+}))
 
 app.post('/quotes', (req, res) => {
   db.collection('quotes').insertOne(req.body, (err, result) => {
