@@ -4,7 +4,7 @@ process.title = 'node-chat'
 
 // Port where we'll run the websocket server
 var {
-  webSocketsServerPort
+  WSS_PORT
 } = require('./config.js')
 
 // websocket and http servers
@@ -39,9 +39,9 @@ var server = http.createServer((request, response) => {
   // Not important for us. We're writing WebSocket server,
   // not HTTP server
 })
-server.listen(webSocketsServerPort, () => {
+server.listen(WSS_PORT, () => {
   console.log((new Date()) + ' Server is listening on port ' +
-    webSocketsServerPort)
+    WSS_PORT)
 })
 /**
  * WebSocket server
